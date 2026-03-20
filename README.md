@@ -1,2 +1,0 @@
-# SUUKALI
-Marketplace Senegal
