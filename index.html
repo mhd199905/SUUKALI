@@ -1,0 +1,2861 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suukali — Marketplace Senegal</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ═══════════════════════════════════════════════
+   VARIABLES CSS
+═══════════════════════════════════════════════ */
+:root {
+  --gold:       #D4A017;
+  --gold-lt:    #FEF3D0;
+  --dark:       #0F0F1A;
+  --dark2:      #1A1A2E;
+  --dark3:      #252540;
+  --green:      #00C896;
+  --green-dk:   #009970;
+  --red:        #FF4757;
+  --blue:       #4A90E2;
+  --white:      #FFFFFF;
+  --grey:       #8892A4;
+  --grey-lt:    #F4F6FA;
+  --border:     #E8ECF4;
+  --wave:       #00BF6F;
+  --wave-dk:    #009955;
+  --shadow:     0 4px 24px rgba(15,15,26,0.10);
+  --shadow-lg:  0 8px 40px rgba(15,15,26,0.18);
+  --radius:     16px;
+  --radius-sm:  10px;
+  --transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ═══════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--grey-lt);
+  color: var(--dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,h2,h3,h4 { font-family: 'Syne', sans-serif; line-height: 1.2; }
+
+a { text-decoration: none; color: inherit; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+button { cursor: pointer; border: none; outline: none; font-family: inherit; }
+
+input, textarea, select {
+  font-family: inherit;
+  outline: none;
+  border: none;
+}
+
+/* ═══════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--grey-lt); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ═══════════════════════════════════════════════
+   HEADER & NAV
+═══════════════════════════════════════════════ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--gold), #E8B84B);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.logo-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--dark);
+  letter-spacing: -0.5px;
+}
+
+.logo-text span { color: var(--gold); }
+
+.search-bar {
+  flex: 1;
+  max-width: 480px;
+  position: relative;
+}
+
+.search-bar input {
+  width: 100%;
+  height: 44px;
+  padding: 0 44px 0 16px;
+  background: var(--grey-lt);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--dark);
+  transition: var(--transition);
+}
+
+.search-bar input:focus {
+  background: var(--white);
+  border-color: var(--gold);
+}
+
+.search-bar input::placeholder { color: var(--grey); }
+
+.search-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  color: var(--grey);
+  font-size: 16px;
+  transition: var(--transition);
+}
+
+.search-btn:hover { color: var(--gold); }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.nav-btn-ghost {
+  color: var(--dark);
+  background: var(--grey-lt);
+}
+
+.nav-btn-ghost:hover { background: var(--border); }
+
+.nav-btn-gold {
+  background: linear-gradient(135deg, var(--gold), #E8B84B);
+  color: var(--white);
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(212,160,23,0.35);
+}
+
+.nav-btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(212,160,23,0.45);
+}
+
+.cart-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--grey-lt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--dark);
+  transition: var(--transition);
+}
+
+.cart-btn:hover { background: var(--border); }
+
+.cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  background: var(--red);
+  color: var(--white);
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ═══════════════════════════════════════════════
+   CATEGORIES BAR
+═══════════════════════════════════════════════ */
+.categories-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+
+.categories-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  height: 52px;
+  align-items: center;
+}
+
+.categories-inner::-webkit-scrollbar { display: none; }
+
+.cat-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  background: transparent;
+  color: var(--grey);
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.cat-btn:hover {
+  background: var(--grey-lt);
+  color: var(--dark);
+}
+
+.cat-btn.active {
+  background: var(--gold-lt);
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.cat-btn i { font-size: 15px; }
+
+/* ═══════════════════════════════════════════════
+   HERO BANNER
+═══════════════════════════════════════════════ */
+.hero {
+  background: linear-gradient(135deg, var(--dark2) 0%, var(--dark3) 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 60px 24px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212,160,23,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0,200,150,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content { flex: 1; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(212,160,23,0.15);
+  border: 1px solid rgba(212,160,23,0.3);
+  border-radius: 100px;
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+
+.hero-title span { color: var(--gold); }
+
+.hero-sub {
+  color: rgba(255,255,255,0.65);
+  font-size: 16px;
+  margin-bottom: 32px;
+  max-width: 420px;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--gold), #E8B84B);
+  color: var(--dark);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 15px;
+  transition: var(--transition);
+  box-shadow: 0 4px 20px rgba(212,160,23,0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212,160,23,0.5);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover { background: rgba(255,255,255,0.15); }
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.stat-item { text-align: center; }
+
+.stat-num {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION STYLE
+═══════════════════════════════════════════════ */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--dark);
+}
+
+.section-title span { color: var(--gold); }
+
+.see-all {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--transition);
+}
+
+.see-all:hover { gap: 8px; }
+
+/* ═══════════════════════════════════════════════
+   CATEGORY CARDS
+═══════════════════════════════════════════════ */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 16px;
+}
+
+.cat-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 2px solid transparent;
+  box-shadow: var(--shadow);
+}
+
+.cat-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.cat-card.active { border-color: var(--gold); background: var(--gold-lt); }
+
+.cat-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin: 0 auto 12px;
+}
+
+.cat-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--dark);
+}
+
+.cat-count {
+  font-size: 11px;
+  color: var(--grey);
+  margin-top: 2px;
+}
+
+/* ═══════════════════════════════════════════════
+   PRODUCT GRID
+═══════════════════════════════════════════════ */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  cursor: pointer;
+  border: 1px solid var(--border);
+  animation: fadeIn 0.4s ease both;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--gold);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.product-img {
+  position: relative;
+  height: 200px;
+  background: var(--grey-lt);
+  overflow: hidden;
+}
+
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.product-card:hover .product-img img { transform: scale(1.06); }
+
+.product-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--grey);
+  font-size: 13px;
+}
+
+.product-img-placeholder i { font-size: 36px; opacity: 0.4; }
+
+.product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-new    { background: var(--green);  color: var(--white); }
+.badge-hot    { background: var(--red);    color: var(--white); }
+.badge-promo  { background: var(--gold);   color: var(--dark);  }
+.badge-used   { background: var(--dark3);  color: var(--white); }
+
+.product-fav {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: var(--grey);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: var(--transition);
+}
+
+.product-fav:hover { color: var(--red); transform: scale(1.1); }
+.product-fav.active { color: var(--red); }
+
+.product-info { padding: 16px; }
+
+.product-cat {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.product-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--dark);
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-condition {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--grey);
+  margin-bottom: 10px;
+}
+
+.product-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.product-price {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--dark);
+}
+
+.product-price span {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--grey);
+}
+
+.add-cart-btn {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--gold), #E8B84B);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark);
+  font-size: 15px;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.add-cart-btn:hover { transform: scale(1.1); }
+
+.seller-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--grey);
+}
+
+.seller-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--green));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.seller-loc { margin-left: auto; display: flex; align-items: center; gap: 3px; }
+
+/* ═══════════════════════════════════════════════
+   MODAL OVERLAY
+═══════════════════════════════════════════════ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,15,26,0.7);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: overlayIn 0.2s ease;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.overlay.active { display: flex; }
+
+.modal {
+  background: var(--white);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(15,15,26,0.35);
+  animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px 0;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--dark);
+}
+
+.modal-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--grey-lt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--grey);
+  transition: var(--transition);
+}
+
+.modal-close:hover { background: var(--red); color: var(--white); }
+
+.modal-body { padding: 24px 28px 28px; }
+
+/* ═══════════════════════════════════════════════
+   FORMULAIRE VENDRE
+═══════════════════════════════════════════════ */
+.form-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.form-label span { color: var(--red); }
+
+.form-input {
+  height: 46px;
+  padding: 0 14px;
+  background: var(--grey-lt);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--dark);
+  transition: var(--transition);
+  width: 100%;
+}
+
+.form-input:focus {
+  background: var(--white);
+  border-color: var(--gold);
+}
+
+.form-input::placeholder { color: var(--grey); }
+
+.form-textarea {
+  height: 90px;
+  padding: 12px 14px;
+  resize: none;
+  background: var(--grey-lt);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--dark);
+  transition: var(--transition);
+  width: 100%;
+}
+
+.form-textarea:focus {
+  background: var(--white);
+  border-color: var(--gold);
+}
+
+.form-select {
+  height: 46px;
+  padding: 0 14px;
+  background: var(--grey-lt);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--dark);
+  transition: var(--transition);
+  width: 100%;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238892A4' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.form-select:focus {
+  background-color: var(--white);
+  border-color: var(--gold);
+}
+
+/* Upload photo */
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 32px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+
+.upload-zone:hover { border-color: var(--gold); background: var(--gold-lt); }
+
+.upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+.upload-icon { font-size: 36px; color: var(--grey); margin-bottom: 10px; }
+.upload-text { font-size: 14px; color: var(--dark); font-weight: 500; margin-bottom: 4px; }
+.upload-sub  { font-size: 12px; color: var(--grey); }
+
+/* Preview photos */
+.photos-preview {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.photo-thumb {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  background: var(--grey-lt);
+}
+
+.photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  background: var(--red);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  cursor: pointer;
+}
+
+/* ═══════════════════════════════════════════════
+   PAIEMENT WAVE
+═══════════════════════════════════════════════ */
+.wave-section {
+  background: linear-gradient(135deg, #E8FFF5, #D0F5E8);
+  border: 2px solid rgba(0,200,150,0.25);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-top: 8px;
+}
+
+.wave-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.wave-logo {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--wave), var(--wave-dk));
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--white);
+}
+
+.wave-info h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.wave-info p {
+  font-size: 12px;
+  color: var(--grey);
+}
+
+.wave-price-display {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  border: 1px solid rgba(0,200,150,0.2);
+}
+
+.wave-price-label { font-size: 13px; color: var(--grey); }
+
+.wave-price-amount {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--wave-dk);
+}
+
+.wave-steps { display: flex; flex-direction: column; gap: 10px; }
+
+.wave-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--dark);
+}
+
+.wave-step-num {
+  width: 24px;
+  height: 24px;
+  background: var(--wave);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.wave-num-input {
+  height: 46px;
+  padding: 0 14px;
+  background: var(--white);
+  border: 2px solid rgba(0,200,150,0.3);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--dark);
+  width: 100%;
+  transition: var(--transition);
+}
+
+.wave-num-input:focus { border-color: var(--wave); }
+
+/* ═══════════════════════════════════════════════
+   BOUTON SOUMETTRE
+═══════════════════════════════════════════════ */
+.submit-btn {
+  width: 100%;
+  height: 52px;
+  background: linear-gradient(135deg, var(--gold), #E8B84B);
+  color: var(--dark);
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition);
+  box-shadow: 0 4px 20px rgba(212,160,23,0.35);
+  margin-top: 20px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212,160,23,0.5);
+}
+
+.submit-btn:active { transform: scale(0.98); }
+
+/* ═══════════════════════════════════════════════
+   PRODUCT DETAIL MODAL
+═══════════════════════════════════════════════ */
+.product-detail { max-width: 700px; }
+
+.product-detail-imgs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.detail-main-img {
+  height: 280px;
+  border-radius: var(--radius);
+  background: var(--grey-lt);
+  overflow: hidden;
+}
+
+.detail-main-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-info { display: grid; gap: 14px; }
+
+.detail-price-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.detail-price {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--dark);
+}
+
+.detail-condition {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.condition-bon   { background: #E8FFF5; color: var(--green-dk); }
+.condition-moyen { background: #FFF8E8; color: #CC8800; }
+.condition-neuf  { background: #E8F4FF; color: var(--blue); }
+
+.detail-desc {
+  font-size: 14px;
+  color: var(--grey);
+  line-height: 1.7;
+}
+
+.detail-seller {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: var(--grey-lt);
+  border-radius: var(--radius-sm);
+}
+
+.seller-av-lg {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--green));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.seller-meta h4 { font-size: 14px; font-weight: 600; color: var(--dark); }
+.seller-meta p  { font-size: 12px; color: var(--grey); }
+
+.contact-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.btn-wave-pay {
+  height: 50px;
+  background: linear-gradient(135deg, var(--wave), var(--wave-dk));
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.btn-wave-pay:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,200,150,0.4); }
+
+.btn-whatsapp {
+  height: 50px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.btn-whatsapp:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(37,211,102,0.4); }
+
+/* ═══════════════════════════════════════════════
+   TOAST NOTIFICATION
+═══════════════════════════════════════════════ */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--dark2);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  animation: toastIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  min-width: 280px;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.toast-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.toast-success .toast-icon { background: rgba(0,200,150,0.2); color: var(--green); }
+.toast-error   .toast-icon { background: rgba(255,71,87,0.2);  color: var(--red); }
+.toast-info    .toast-icon { background: rgba(212,160,23,0.2); color: var(--gold); }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+.footer {
+  background: var(--dark2);
+  color: rgba(255,255,255,0.6);
+  padding: 48px 24px 24px;
+  margin-top: 40px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-brand .logo-text { color: var(--white); margin-bottom: 12px; display: block; }
+
+.footer-brand p { font-size: 13px; line-height: 1.7; margin-bottom: 20px; }
+
+.social-links { display: flex; gap: 10px; }
+
+.social-link {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.6);
+  font-size: 15px;
+  transition: var(--transition);
+}
+
+.social-link:hover { background: var(--gold); color: var(--dark); }
+
+.footer-col h4 {
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+.footer-col li a {
+  font-size: 13px;
+  transition: var(--transition);
+}
+
+.footer-col li a:hover { color: var(--gold); }
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.wave-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(0,200,150,0.12);
+  border: 1px solid rgba(0,200,150,0.2);
+  border-radius: 100px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════
+   EMPTY STATE
+═══════════════════════════════════════════════ */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--grey);
+}
+
+.empty-state i { font-size: 48px; opacity: 0.3; margin-bottom: 16px; display: block; }
+.empty-state h3 { font-size: 18px; color: var(--dark); margin-bottom: 8px; }
+.empty-state p  { font-size: 14px; }
+
+/* ═══════════════════════════════════════════════
+   FILTER BAR
+═══════════════════════════════════════════════ */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  height: 40px;
+  padding: 0 12px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--dark);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-select:focus { border-color: var(--gold); }
+
+.results-count {
+  font-size: 13px;
+  color: var(--grey);
+  margin-left: auto;
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .search-bar { display: none; }
+  .hero-inner { flex-direction: column; gap: 32px; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .contact-btns { grid-template-columns: 1fr; }
+  .cat-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .nav { gap: 16px; }
+}
+
+@media (max-width: 480px) {
+  .footer-inner { grid-template-columns: 1fr; }
+  .hero-stats { gap: 20px; }
+  .nav-btn-ghost { display: none; }
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, var(--grey-lt) 25%, var(--border) 50%, var(--grey-lt) 75%);
+  background-size: 200% 100%;
+  animation: skeleton 1.4s infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ═══════════════════════════════════════════════
+   CHATBOT FAQ
+═══════════════════════════════════════════════ */
+.chatbot-bubble {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 58px;
+  height: 58px;
+  background: linear-gradient(135deg, var(--gold), #E8B84B);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(212,160,23,0.5);
+  z-index: 500;
+  transition: var(--transition);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 4px 20px rgba(212,160,23,0.5); }
+  50%  { box-shadow: 0 4px 32px rgba(212,160,23,0.8); }
+  100% { box-shadow: 0 4px 20px rgba(212,160,23,0.5); }
+}
+
+.chatbot-bubble:hover { transform: scale(1.1); }
+
+.chatbot-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  background: var(--red);
+  color: white;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatbot-window {
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  width: 340px;
+  max-height: 520px;
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(15,15,26,0.2);
+  z-index: 500;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  animation: chatIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+@keyframes chatIn {
+  from { opacity:0; transform: scale(0.8) translateY(20px); }
+  to   { opacity:1; transform: scale(1) translateY(0); }
+}
+
+.chatbot-window.open { display: flex; }
+
+.chatbot-header {
+  background: linear-gradient(135deg, var(--dark2), var(--dark3));
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chatbot-avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--gold), #E8B84B);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.chatbot-info h4 {
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.chatbot-info p {
+  color: rgba(255,255,255,0.5);
+  font-size: 11px;
+}
+
+.chatbot-status {
+  width: 8px;
+  height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  margin-left: auto;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px var(--green);
+}
+
+.chatbot-close {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.chatbot-close:hover { background: var(--red); }
+
+.chatbot-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--grey-lt);
+}
+
+.chat-msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  animation: msgIn 0.2s ease;
+}
+
+@keyframes msgIn {
+  from { opacity:0; transform: translateY(8px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+.chat-msg.bot {
+  background: var(--white);
+  color: var(--dark);
+  border-bottom-left-radius: 4px;
+  align-self: flex-start;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.chat-msg.user {
+  background: linear-gradient(135deg, var(--gold), #E8B84B);
+  color: var(--dark);
+  border-bottom-right-radius: 4px;
+  align-self: flex-end;
+  font-weight: 500;
+}
+
+.chatbot-faqs {
+  padding: 12px 16px;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.faq-btn {
+  text-align: left;
+  padding: 9px 12px;
+  background: var(--grey-lt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--dark);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.faq-btn:hover {
+  background: var(--gold-lt);
+  border-color: var(--gold);
+  color: var(--dark);
+}
+
+.faq-btn i { color: var(--gold); font-size: 12px; flex-shrink:0; }
+
+.chatbot-input-row {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+
+.chatbot-input {
+  flex: 1;
+  height: 38px;
+  padding: 0 12px;
+  background: var(--grey-lt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--dark);
+  outline: none;
+  transition: var(--transition);
+}
+
+.chatbot-input:focus {
+  border-color: var(--gold);
+  background: var(--white);
+}
+
+.chatbot-send {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--gold), #E8B84B);
+  border: none;
+  border-radius: 10px;
+  color: var(--dark);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.chatbot-send:hover { transform: scale(1.1); }
+
+@media (max-width: 480px) {
+  .chatbot-window { width: calc(100vw - 32px); right: 16px; }
+  .chatbot-bubble { right: 16px; bottom: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════ -->
+<header class="header">
+  <nav class="nav">
+    <div class="logo">
+      <div class="logo-icon">🛍️</div>
+      <div class="logo-text">Suuk<span>ali</span></div>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Chercher un article..." id="searchInput" oninput="filterProducts()">
+      <button class="search-btn"><i class="fas fa-search"></i></button>
+    </div>
+
+    <div class="nav-actions">
+      <button class="nav-btn nav-btn-ghost" onclick="openModal('loginModal')">
+        <i class="fas fa-user"></i> Connexion
+      </button>
+      <button class="nav-btn nav-btn-gold" onclick="openModal('sellModal')">
+        <i class="fas fa-plus"></i> Vendre
+      </button>
+      <button class="cart-btn" onclick="openModal('cartModal')">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ═══════════════════════════════════════════
+     CATEGORIES BAR
+═══════════════════════════════════════════ -->
+<div class="categories-bar">
+  <div class="categories-inner">
+    <button class="cat-btn active" onclick="filterByCategory('all', this)">
+      <i class="fas fa-border-all"></i> Tout
+    </button>
+    <button class="cat-btn" onclick="filterByCategory('vetements', this)">
+      <i class="fas fa-tshirt"></i> Vêtements
+    </button>
+    <button class="cat-btn" onclick="filterByCategory('electronique', this)">
+      <i class="fas fa-mobile-alt"></i> Electronique
+    </button>
+    <button class="cat-btn" onclick="filterByCategory('maison', this)">
+      <i class="fas fa-couch"></i> Maison
+    </button>
+    <button class="cat-btn" onclick="filterByCategory('chaussures', this)">
+      <i class="fas fa-shoe-prints"></i> Chaussures
+    </button>
+    <button class="cat-btn" onclick="filterByCategory('sport', this)">
+      <i class="fas fa-futbol"></i> Sport
+    </button>
+    <button class="cat-btn" onclick="filterByCategory('livres', this)">
+      <i class="fas fa-book"></i> Livres
+    </button>
+    <button class="cat-btn" onclick="filterByCategory('bebe', this)">
+      <i class="fas fa-baby"></i> Bébé
+    </button>
+    <button class="cat-btn" onclick="filterByCategory('voiture', this)">
+      <i class="fas fa-car"></i> Auto
+    </button>
+    <button class="cat-btn" onclick="filterByCategory('bijoux', this)">
+      <i class="fas fa-gem"></i> Bijoux
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">🇸🇳 Marketplace Sénégal</div>
+      <h1 class="hero-title">
+        Vendez ce que<br>vous n'utilisez <span>plus</span>
+      </h1>
+      <p class="hero-sub">
+        Donnez une seconde vie à vos objets. Achetez et vendez facilement au Sénégal. Paiement sécurisé via Wave.
+      </p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="openModal('sellModal')">
+          <i class="fas fa-tag"></i> Publier une annonce
+        </button>
+        <button class="btn-secondary" onclick="scrollToProducts()">
+          <i class="fas fa-search"></i> Parcourir les annonces
+        </button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num" id="totalArticles">0</span>
+        <span class="stat-label">Articles</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">100F</span>
+        <span class="stat-label">Pour publier</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">Wave</span>
+        <span class="stat-label">Paiement sécurisé</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CATEGORIES CARDS
+═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <h2 class="section-title">Toutes les <span>catégories</span></h2>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card" onclick="filterByCategory('vetements')">
+      <div class="cat-icon" style="background:#FFF3E0">👕</div>
+      <div class="cat-name">Vêtements</div>
+      <div class="cat-count" id="cnt-vetements">0 articles</div>
+    </div>
+    <div class="cat-card" onclick="filterByCategory('electronique')">
+      <div class="cat-icon" style="background:#E3F2FD">📱</div>
+      <div class="cat-name">Electronique</div>
+      <div class="cat-count" id="cnt-electronique">0 articles</div>
+    </div>
+    <div class="cat-card" onclick="filterByCategory('maison')">
+      <div class="cat-icon" style="background:#E8F5E9">🏠</div>
+      <div class="cat-name">Maison</div>
+      <div class="cat-count" id="cnt-maison">0 articles</div>
+    </div>
+    <div class="cat-card" onclick="filterByCategory('chaussures')">
+      <div class="cat-icon" style="background:#FCE4EC">👟</div>
+      <div class="cat-name">Chaussures</div>
+      <div class="cat-count" id="cnt-chaussures">0 articles</div>
+    </div>
+    <div class="cat-card" onclick="filterByCategory('sport')">
+      <div class="cat-icon" style="background:#F3E5F5">⚽</div>
+      <div class="cat-name">Sport</div>
+      <div class="cat-count" id="cnt-sport">0 articles</div>
+    </div>
+    <div class="cat-card" onclick="filterByCategory('livres')">
+      <div class="cat-icon" style="background:#E8EAF6">📚</div>
+      <div class="cat-name">Livres</div>
+      <div class="cat-count" id="cnt-livres">0 articles</div>
+    </div>
+    <div class="cat-card" onclick="filterByCategory('bebe')">
+      <div class="cat-icon" style="background:#E1F5FE">👶</div>
+      <div class="cat-name">Bébé</div>
+      <div class="cat-count" id="cnt-bebe">0 articles</div>
+    </div>
+    <div class="cat-card" onclick="filterByCategory('voiture')">
+      <div class="cat-icon" style="background:#EFEBE9">🚗</div>
+      <div class="cat-name">Auto/Moto</div>
+      <div class="cat-count" id="cnt-voiture">0 articles</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PRODUITS
+═══════════════════════════════════════════ -->
+<div class="section" id="productsSection">
+  <div class="section-header">
+    <h2 class="section-title" id="productsTitle">Dernières <span>annonces</span></h2>
+    <a href="#" class="see-all">Voir tout <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="filter-bar">
+    <select class="filter-select" onchange="sortProducts(this.value)">
+      <option value="recent">Plus récent</option>
+      <option value="prix-asc">Prix croissant</option>
+      <option value="prix-desc">Prix décroissant</option>
+    </select>
+    <select class="filter-select" id="conditionFilter" onchange="filterByCondition(this.value)">
+      <option value="all">Toutes conditions</option>
+      <option value="Neuf">Neuf</option>
+      <option value="Très bon">Très bon état</option>
+      <option value="Bon">Bon état</option>
+      <option value="Moyen">Etat moyen</option>
+    </select>
+    <span class="results-count" id="resultsCount">0 résultats</span>
+  </div>
+
+  <div class="product-grid" id="productGrid">
+    <!-- Produits injectés par JS -->
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-text">Suuk<span style="color:var(--gold)">ali</span></span>
+      <p>La marketplace N°1 au Sénégal pour acheter et vendre vos articles de seconde main. Simple, rapide et sécurisé.</p>
+      <div class="social-links">
+        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Toutes les annonces</a></li>
+        <li><a href="#">Vendre un article</a></li>
+        <li><a href="#">Comment ça marche</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Catégories</h4>
+      <ul>
+        <li><a href="#">Vêtements</a></li>
+        <li><a href="#">Electronique</a></li>
+        <li><a href="#">Maison & Déco</a></li>
+        <li><a href="#">Chaussures</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">À propos</a></li>
+        <li><a href="#">Aide & FAQ</a></li>
+        <li><a href="#">Signaler un problème</a></li>
+        <li><a href="#">Conditions d'utilisation</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Suukali — Dakar, Sénégal 🇸🇳</span>
+    <div class="wave-badge">
+      <i class="fas fa-shield-alt"></i> Paiement sécurisé Wave
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     MODAL : VENDRE UN ARTICLE
+═══════════════════════════════════════════ -->
+<div class="overlay" id="sellModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">📦 Publier une annonce</h3>
+      <button class="modal-close" onclick="closeModal('sellModal')">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="sellForm" onsubmit="handleSell(event)">
+        <div class="form-grid">
+
+          <!-- Photos -->
+          <div class="form-group">
+            <label class="form-label">Photos <span>*</span></label>
+            <div class="upload-zone" id="uploadZone">
+              <input type="file" multiple accept="image/*" id="photoInput" onchange="handlePhotos(event)">
+              <div class="upload-icon"><i class="fas fa-camera"></i></div>
+              <div class="upload-text">Ajouter des photos</div>
+              <div class="upload-sub">Max 4 photos — JPG, PNG</div>
+            </div>
+            <div class="photos-preview" id="photosPreview"></div>
+          </div>
+
+          <!-- Titre -->
+          <div class="form-group">
+            <label class="form-label">Titre de l'annonce <span>*</span></label>
+            <input class="form-input" type="text" id="sellTitle"
+                   placeholder="Ex: iPhone 12 Pro Max 128Go" required maxlength="80">
+          </div>
+
+          <!-- Catégorie + Condition -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Catégorie <span>*</span></label>
+              <select class="form-select" id="sellCategory" required>
+                <option value="">Choisir...</option>
+                <option value="vetements">👕 Vêtements</option>
+                <option value="electronique">📱 Electronique</option>
+                <option value="maison">🏠 Maison & Déco</option>
+                <option value="chaussures">👟 Chaussures</option>
+                <option value="sport">⚽ Sport & Loisirs</option>
+                <option value="livres">📚 Livres & Médias</option>
+                <option value="bebe">👶 Bébé & Enfant</option>
+                <option value="voiture">🚗 Auto / Moto</option>
+                <option value="bijoux">💎 Bijoux & Montres</option>
+                <option value="autre">📦 Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">État <span>*</span></label>
+              <select class="form-select" id="sellCondition" required>
+                <option value="">Choisir...</option>
+                <option value="Neuf">✨ Neuf (jamais utilisé)</option>
+                <option value="Très bon">👍 Très bon état</option>
+                <option value="Bon">👌 Bon état</option>
+                <option value="Moyen">🔧 État moyen</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea class="form-textarea" id="sellDesc"
+                      placeholder="Décrivez votre article : marque, taille, défauts éventuels..."></textarea>
+          </div>
+
+          <!-- Prix + Localisation -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Prix (FCFA) <span>*</span></label>
+              <input class="form-input" type="number" id="sellPrice"
+                     placeholder="Ex: 15000" required min="100">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Ville / Quartier <span>*</span></label>
+              <select class="form-select" id="sellLocation" required>
+                <option value="">Choisir...</option>
+                <option value="Dakar Centre">Dakar Centre</option>
+                <option value="Plateau">Plateau</option>
+                <option value="Médina">Médina</option>
+                <option value="Ouakam">Ouakam</option>
+                <option value="Point E">Point E</option>
+                <option value="Almadies">Almadies</option>
+                <option value="Sacré-Cœur">Sacré-Cœur</option>
+                <option value="Parcelles Assainies">Parcelles Assainies</option>
+                <option value="Pikine">Pikine</option>
+                <option value="Guédiawaye">Guédiawaye</option>
+                <option value="Rufisque">Rufisque</option>
+                <option value="Thiès">Thiès</option>
+                <option value="Saint-Louis">Saint-Louis</option>
+                <option value="Ziguinchor">Ziguinchor</option>
+                <option value="Touba">Touba</option>
+                <option value="Autre">Autre ville</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Vendeur -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Votre prénom <span>*</span></label>
+              <input class="form-input" type="text" id="sellName"
+                     placeholder="Ex: Mouhamed" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">WhatsApp <span>*</span></label>
+              <input class="form-input" type="tel" id="sellPhone"
+                     placeholder="Ex: 77 XXX XX XX" required>
+            </div>
+          </div>
+
+          <!-- WAVE PAIEMENT -->
+          <div class="wave-section">
+            <div class="wave-header">
+              <div class="wave-logo"><i class="fas fa-wallet"></i></div>
+              <div class="wave-info">
+                <h4>Paiement Wave — 100 FCFA</h4>
+                <p>Frais de publication pour mettre votre annonce en ligne</p>
+              </div>
+            </div>
+
+            <div class="wave-price-display">
+              <span class="wave-price-label">Frais de publication</span>
+              <span class="wave-price-amount">100 FCFA</span>
+            </div>
+
+            <div class="wave-steps">
+              <div class="wave-step">
+                <div class="wave-step-num">1</div>
+                <span>Ouvrez l'app <strong>Wave</strong> sur votre téléphone</span>
+              </div>
+              <div class="wave-step">
+                <div class="wave-step-num">2</div>
+                <span>Envoyez <strong>100 FCFA</strong> au numéro Wave du site</span>
+              </div>
+              <div class="wave-step">
+                <div class="wave-step-num">3</div>
+                <span>Entrez votre numéro Wave ci-dessous pour confirmation</span>
+              </div>
+            </div>
+
+            <br>
+            <div class="form-group">
+              <label class="form-label">Votre numéro Wave <span>*</span></label>
+              <input class="wave-num-input" type="tel" id="waveNumber"
+                     placeholder="Ex: 77 XXX XX XX" required>
+            </div>
+
+            <br>
+            <div style="padding:12px;background:rgba(0,200,150,0.08);border-radius:10px;font-size:12px;color:var(--grey);line-height:1.6;">
+              <i class="fas fa-info-circle" style="color:var(--wave);margin-right:6px;"></i>
+              Numéro Wave du site : <strong style="color:var(--dark)">+221 77 257 30 63</strong><br>
+              Référence du paiement : votre numéro de téléphone
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-check-circle"></i>
+            Publier mon annonce — 100 FCFA Wave
+          </button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODAL : DETAIL PRODUIT
+═══════════════════════════════════════════ -->
+<div class="overlay" id="productModal">
+  <div class="modal product-detail">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modalProductTitle">Détail de l'article</h3>
+      <button class="modal-close" onclick="closeModal('productModal')">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="product-detail-imgs">
+        <div class="detail-main-img">
+          <div id="modalProductImg" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--grey-lt);font-size:64px;"></div>
+        </div>
+      </div>
+      <div class="detail-info">
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;" id="modalProductCat"></div>
+          <h2 style="font-size:22px;font-weight:800;color:var(--dark);margin-bottom:4px;" id="modalProductName"></h2>
+        </div>
+        <div class="detail-price-row">
+          <span class="detail-price" id="modalProductPrice"></span>
+          <span class="detail-condition" id="modalProductCondition"></span>
+        </div>
+        <p class="detail-desc" id="modalProductDesc"></p>
+        <div class="detail-seller">
+          <div class="seller-av-lg" id="modalSellerAvatar"></div>
+          <div class="seller-meta">
+            <h4 id="modalSellerName"></h4>
+            <p id="modalSellerLoc"></p>
+          </div>
+        </div>
+
+        <!-- Numero vendeur visible -->
+        <div style="background:var(--gold-lt);border:2px solid var(--gold);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;background:var(--gold);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--dark);font-size:18px;flex-shrink:0;">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--grey);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Contacter le vendeur</div>
+            <div style="font-size:18px;font-weight:800;color:var(--dark);font-family:'Syne',sans-serif;" id="modalSellerPhone">--</div>
+          </div>
+          <a id="modalCallBtn" href="#"
+             style="margin-left:auto;padding:10px 16px;background:var(--dark);color:var(--white);border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:6px;">
+            <i class="fas fa-phone"></i> Appeler
+          </a>
+        </div>
+
+        <div class="contact-btns">
+          <button class="btn-wave-pay" id="modalWaveBtn">
+            <i class="fas fa-wallet"></i> Payer via Wave
+          </button>
+          <button class="btn-whatsapp" id="modalWhatsappBtn">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODAL : CONNEXION
+═══════════════════════════════════════════ -->
+<div class="overlay" id="loginModal">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <h3 class="modal-title">👤 Se connecter</h3>
+      <button class="modal-close" onclick="closeModal('loginModal')">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Numéro Wave / Téléphone</label>
+          <input class="form-input" type="tel" placeholder="77 XXX XX XX">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mot de passe</label>
+          <input class="form-input" type="password" placeholder="••••••••">
+        </div>
+        <button class="submit-btn">
+          <i class="fas fa-sign-in-alt"></i> Se connecter
+        </button>
+        <div style="text-align:center;font-size:13px;color:var(--grey);">
+          Pas encore de compte ?
+          <a href="#" style="color:var(--gold);font-weight:600;">S'inscrire gratuitement</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL PANIER -->
+<div class="overlay" id="cartModal">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header">
+      <h3 class="modal-title">🛒 Mon Panier</h3>
+      <button class="modal-close" onclick="closeModal('cartModal')">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div id="cartItems"></div>
+      <div id="cartEmpty" style="text-align:center;padding:40px;color:var(--grey);display:none">
+        <i class="fas fa-shopping-cart" style="font-size:48px;opacity:0.3;display:block;margin-bottom:16px"></i>
+        <h3 style="color:var(--dark);margin-bottom:8px">Panier vide</h3>
+        <p style="font-size:14px">Ajoutez des articles a votre panier</p>
+      </div>
+      <div id="cartFooter" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-size:15px;font-weight:600;color:var(--dark)">Total</span>
+          <span style="font-family:Syne,sans-serif;font-size:22px;font-weight:800;color:var(--gold)" id="cartTotal">0 FCFA</span>
+        </div>
+        <button onclick="clearCart()" style="width:100%;height:46px;background:var(--grey-lt);border:none;border-radius:10px;font-size:14px;font-weight:600;color:var(--grey);cursor:pointer;margin-bottom:8px">
+          <i class="fas fa-trash"></i> Vider le panier
+        </button>
+        <button onclick="payerWave()" style="width:100%;height:50px;background:linear-gradient(135deg,#00BF6F,#009955);border:none;border-radius:10px;font-size:15px;font-weight:700;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">
+          <i class="fas fa-wallet"></i> Payer via Wave — +221 77 257 30 63
+        </button>
+        <div style="margin-top:12px;padding:12px;background:#E8FFF5;border-radius:10px;font-size:12px;color:#117A65;line-height:1.6;text-align:center">
+          <i class="fas fa-info-circle"></i>
+          Ouvrez Wave sur votre telephone<br>
+          Envoyez le montant au <strong>+221 77 257 30 63</strong><br>
+          Reference : <strong id="waveRef">votre nom</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     CHATBOT FAQ
+═══════════════════════════════════════════ -->
+<button class="chatbot-bubble" onclick="toggleChatbot()" title="Aide">
+  🤖
+  <span class="chatbot-badge">?</span>
+</button>
+
+<div class="chatbot-window" id="chatbotWindow">
+  <div class="chatbot-header">
+    <div class="chatbot-avatar">🤖</div>
+    <div class="chatbot-info">
+      <h4>Assistant Suukali</h4>
+      <p>Toujours disponible pour vous aider</p>
+    </div>
+    <div class="chatbot-status"></div>
+    <button class="chatbot-close" onclick="toggleChatbot()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="chatbot-messages" id="chatMessages">
+    <div class="chat-msg bot">
+      👋 Bonjour ! Je suis l'assistant Suukali.<br><br>
+      Comment puis-je vous aider ?
+    </div>
+  </div>
+
+  <div class="chatbot-faqs" id="chatFaqs">
+    <button class="faq-btn" onclick="askFaq(this)">
+      <i class="fas fa-tag"></i> Comment vendre un article ?
+    </button>
+    <button class="faq-btn" onclick="askFaq(this)">
+      <i class="fas fa-wallet"></i> Comment payer avec Wave ?
+    </button>
+    <button class="faq-btn" onclick="askFaq(this)">
+      <i class="fas fa-truck"></i> Comment recuperer mon achat ?
+    </button>
+    <button class="faq-btn" onclick="askFaq(this)">
+      <i class="fas fa-shield-alt"></i> Est-ce securise ?
+    </button>
+    <button class="faq-btn" onclick="askFaq(this)">
+      <i class="fas fa-money-bill"></i> Combien coute la publication ?
+    </button>
+    <button class="faq-btn" onclick="askFaq(this)">
+      <i class="fas fa-phone"></i> Contacter le support
+    </button>
+    <button class="faq-btn" onclick="askFaq(this)">
+      <i class="fas fa-undo"></i> Retour et remboursement ?
+    </button>
+    <button class="faq-btn" onclick="askFaq(this)">
+      <i class="fas fa-map-marker-alt"></i> Quelles villes sont disponibles ?
+    </button>
+  </div>
+
+  <div class="chatbot-input-row">
+    <input class="chatbot-input" type="text" id="chatInput"
+           placeholder="Ecrivez votre question..."
+           onkeypress="if(event.key==='Enter') sendChat()">
+    <button class="chatbot-send" onclick="sendChat()">
+      <i class="fas fa-paper-plane"></i>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TOAST CONTAINER
+═══════════════════════════════════════════ -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════ -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, orderBy, query, onSnapshot }
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDmvDfvFAVedaQWuqUm1V724rRsSIybpYc",
+  authDomain: "suukali.firebaseapp.com",
+  projectId: "suukali",
+  storageBucket: "suukali.firebasestorage.app",
+  messagingSenderId: "879834788939",
+  appId: "1:879834788939:web:ba70b41db7ee244aef89ce"
+};
+
+const fireApp = initializeApp(firebaseConfig);
+const db = getFirestore(fireApp);
+const articlesRef = collection(db, 'articles');
+
+// Charger depuis Firebase en temps reel
+const q = query(articlesRef, orderBy('date', 'desc'));
+onSnapshot(q, (snapshot) => {
+  window._firebaseProducts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  if (window._suukaliReady) window._refreshProducts();
+});
+
+// Sauvegarder dans Firebase
+window._saveToFirebase = async (product) => {
+  try {
+    await addDoc(articlesRef, product);
+    return true;
+  } catch(e) {
+    console.error(e);
+    return false;
+  }
+};
+</script>
+
+<script>
+// ── DATA STORE ───────────────────────────────────────────────────
+let products = [];
+let cart = JSON.parse(localStorage.getItem('suukali_cart') || '[]');
+let currentCategory = 'all';
+let currentCondition = 'all';
+let currentSort = 'recent';
+let photos = [];
+
+// Produits de démonstration
+const demoProducts = [
+  {
+    id: 'd1', title: 'iPhone 12 Pro Max 128Go', category: 'electronique',
+    price: 180000, condition: 'Très bon', desc: 'Très bon état, pas de rayures. Batterie 89%. Chargeur inclus.',
+    seller: 'Moussa', phone: '77 123 45 67', location: 'Plateau', date: Date.now() - 3600000, emoji: '📱', views: 42
+  },
+  {
+    id: 'd2', title: 'Robe Bou Bou Brodée Femme', category: 'vetements',
+    price: 8500, condition: 'Neuf', desc: 'Jamais portée. Taille M. Couleur bleu et or.',
+    seller: 'Fatou', phone: '78 234 56 78', location: 'Médina', date: Date.now() - 7200000, emoji: '👗', views: 18
+  },
+  {
+    id: 'd3', title: 'Canapé 3 places en tissu', category: 'maison',
+    price: 45000, condition: 'Bon', desc: 'Canapé confortable, légères traces d\'usage. Couleur beige.',
+    seller: 'Ibrahima', phone: '76 345 67 89', location: 'Sacré-Cœur', date: Date.now() - 86400000, emoji: '🛋️', views: 27
+  },
+  {
+    id: 'd4', title: 'Nike Air Force 1 Blanc T42', category: 'chaussures',
+    price: 22000, condition: 'Bon', desc: 'Pointure 42, légèrement utilisées. Semelle propre.',
+    seller: 'Cheikh', phone: '70 456 78 90', location: 'Ouakam', date: Date.now() - 172800000, emoji: '👟', views: 35
+  },
+  {
+    id: 'd5', title: 'Samsung Galaxy Tab A8 2022', category: 'electronique',
+    price: 95000, condition: 'Très bon', desc: 'Tablette 10 pouces, WiFi + 4G. Avec housse de protection.',
+    seller: 'Aissatou', phone: '77 567 89 01', location: 'Almadies', date: Date.now() - 259200000, emoji: '💻', views: 61
+  },
+  {
+    id: 'd6', title: 'Vélo VTT 26 pouces Adulte', category: 'sport',
+    price: 35000, condition: 'Bon', desc: 'Vélo en bon état, vitesses fonctionnelles. Quelques égratignures.',
+    seller: 'Omar', phone: '78 678 90 12', location: 'Pikine', date: Date.now() - 345600000, emoji: '🚲', views: 14
+  },
+  {
+    id: 'd7', title: 'Livres BTS Transport Logistique', category: 'livres',
+    price: 5000, condition: 'Bon', desc: 'Lot de 5 livres de cours BTS Transport. Très utile pour les étudiants.',
+    seller: 'Mouhamed', phone: '77 789 01 23', location: 'Saint-Louis', date: Date.now() - 432000000, emoji: '📚', views: 8
+  },
+  {
+    id: 'd8', title: 'Poussette bébé pliable', category: 'bebe',
+    price: 18000, condition: 'Très bon', desc: 'Poussette légère et pliable. Panier de rangement. Bon état général.',
+    seller: 'Mariama', phone: '76 890 12 34', location: 'Rufisque', date: Date.now() - 518400000, emoji: '🍼', views: 22
+  },
+];
+
+// Firebase produits charges via module
+window._firebaseProducts = [];
+window._refreshProducts = () => {
+  products = [...demoProducts, ...window._firebaseProducts];
+  renderProducts(getFilteredSorted());
+  document.getElementById('totalArticles').textContent = products.length;
+  updateCategoryCounts();
+};
+
+function saveCart() {
+  localStorage.setItem('suukali_cart', JSON.stringify(cart));
+}
+
+// ── RENDER ────────────────────────────────────────────────────────
+function renderProducts(list) {
+  const grid = document.getElementById('productGrid');
+  const count = document.getElementById('resultsCount');
+  count.textContent = `${list.length} résultat${list.length > 1 ? 's' : ''}`;
+
+  if (list.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <i class="fas fa-search"></i>
+        <h3>Aucun article trouvé</h3>
+        <p>Essayez une autre catégorie ou publiez le premier article !</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map((p, i) => `
+    <div class="product-card" onclick="openProductModal('${p.id}')"
+         style="animation-delay:${i * 0.06}s">
+      <div class="product-img">
+        ${p.photo
+          ? `<img src="${p.photo}" alt="${p.title}">`
+          : `<div class="product-img-placeholder">
+               <i style="font-size:48px">${p.emoji || '📦'}</i>
+               <span>Photo à venir</span>
+             </div>`
+        }
+        <span class="product-badge ${getBadgeClass(p.condition)}">${p.condition}</span>
+        <button class="product-fav" onclick="toggleFav(event,'${p.id}')">
+          <i class="far fa-heart"></i>
+        </button>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">${getCatLabel(p.category)}</div>
+        <div class="product-name">${p.title}</div>
+        <div class="product-bottom">
+          <div class="product-price">${formatPrice(p.price)} <span>FCFA</span></div>
+          <button class="add-cart-btn" onclick="addToCart(event,'${p.id}')">
+            <i class="fas fa-cart-plus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="seller-info">
+        <div class="seller-avatar">${p.seller ? p.seller[0].toUpperCase() : '?'}</div>
+        <div style="display:flex;flex-direction:column;gap:1px">
+          <span style="font-weight:600;font-size:12px;color:var(--dark)">${p.seller || 'Vendeur'}</span>
+          <span style="font-size:11px;color:var(--grey)">${p.phone || ''}</span>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:6px">
+          <a href="tel:+221${p.phone?.replace(/\s/g,'')}"
+             onclick="event.stopPropagation()"
+             style="width:30px;height:30px;border-radius:8px;background:#E8F4FF;display:flex;align-items:center;justify-content:center;color:#1B4F72;font-size:13px;text-decoration:none;"
+             title="Appeler">
+            <i class="fas fa-phone"></i>
+          </a>
+          <a href="https://wa.me/221${p.phone?.replace(/\s/g,'')}?text=${encodeURIComponent('Bonjour, je suis intéressé par votre article sur Suukali.')}"
+             target="_blank"
+             onclick="event.stopPropagation()"
+             style="width:30px;height:30px;border-radius:8px;background:#E8FFF5;display:flex;align-items:center;justify-content:center;color:#1E8449;font-size:13px;text-decoration:none;"
+             title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Update stats
+  document.getElementById('totalArticles').textContent = products.length;
+  updateCategoryCounts();
+}
+
+function getBadgeClass(condition) {
+  const map = { 'Neuf': 'badge-new', 'Très bon': 'badge-promo', 'Bon': 'badge-used', 'Moyen': 'badge-hot' };
+  return map[condition] || 'badge-used';
+}
+
+function getCatLabel(cat) {
+  const map = {
+    vetements:'Vêtements', electronique:'Electronique', maison:'Maison',
+    chaussures:'Chaussures', sport:'Sport', livres:'Livres',
+    bebe:'Bébé', voiture:'Auto/Moto', bijoux:'Bijoux', autre:'Autre'
+  };
+  return map[cat] || cat;
+}
+
+function formatPrice(n) {
+  return Number(n).toLocaleString('fr-FR');
+}
+
+function updateCategoryCounts() {
+  const cats = ['vetements','electronique','maison','chaussures','sport','livres','bebe','voiture'];
+  cats.forEach(c => {
+    const el = document.getElementById(`cnt-${c}`);
+    if (el) {
+      const n = products.filter(p => p.category === c).length;
+      el.textContent = `${n} article${n > 1 ? 's' : ''}`;
+    }
+  });
+}
+
+// ── FILTRES ───────────────────────────────────────────────────────
+function getFilteredSorted() {
+  let list = [...products];
+  const search = document.getElementById('searchInput')?.value.toLowerCase() || '';
+
+  if (currentCategory !== 'all') list = list.filter(p => p.category === currentCategory);
+  if (currentCondition !== 'all') list = list.filter(p => p.condition === currentCondition);
+  if (search) list = list.filter(p =>
+    p.title.toLowerCase().includes(search) ||
+    (p.desc || '').toLowerCase().includes(search)
+  );
+
+  if (currentSort === 'prix-asc')  list.sort((a,b) => a.price - b.price);
+  if (currentSort === 'prix-desc') list.sort((a,b) => b.price - a.price);
+  if (currentSort === 'recent')    list.sort((a,b) => b.date - a.date);
+
+  return list;
+}
+
+function filterByCategory(cat, btn) {
+  currentCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  const title = document.getElementById('productsTitle');
+  title.innerHTML = cat === 'all'
+    ? `Dernières <span>annonces</span>`
+    : `${getCatLabel(cat)} <span>(${getFilteredSorted().length})</span>`;
+
+  renderProducts(getFilteredSorted());
+  scrollToProducts();
+}
+
+function filterProducts() { renderProducts(getFilteredSorted()); }
+function sortProducts(v) { currentSort = v; renderProducts(getFilteredSorted()); }
+function filterByCondition(v) { currentCondition = v; renderProducts(getFilteredSorted()); }
+function scrollToProducts() {
+  document.getElementById('productsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── PANIER ────────────────────────────────────────────────────────
+function addToCart(e, id) {
+  e.stopPropagation();
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  cart.push(p);
+  saveCart();
+  document.getElementById('cartBadge').textContent = cart.length;
+  showToast('success', `${p.title} ajouté au panier !`);
+}
+
+function toggleFav(e, id) {
+  e.stopPropagation();
+  const btn = e.currentTarget;
+  btn.classList.toggle('active');
+  const icon = btn.querySelector('i');
+  icon.className = btn.classList.contains('active') ? 'fas fa-heart' : 'far fa-heart';
+  showToast('info', btn.classList.contains('active') ? 'Ajouté aux favoris ❤️' : 'Retiré des favoris');
+}
+
+// ── MODAL PRODUIT ─────────────────────────────────────────────────
+function openProductModal(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+
+  document.getElementById('modalProductTitle').textContent = p.title;
+  document.getElementById('modalProductName').textContent = p.title;
+  document.getElementById('modalProductCat').textContent = getCatLabel(p.category);
+  document.getElementById('modalProductPrice').textContent = `${formatPrice(p.price)} FCFA`;
+  document.getElementById('modalProductDesc').textContent = p.desc || 'Aucune description fournie.';
+  document.getElementById('modalSellerName').textContent = p.seller || 'Vendeur anonyme';
+  document.getElementById('modalSellerLoc').textContent = `📍 ${p.location || 'Dakar'}`;
+  document.getElementById('modalSellerAvatar').textContent = p.seller ? p.seller[0].toUpperCase() : '?';
+  document.getElementById('modalProductImg').textContent = p.emoji || '📦';
+
+  // Afficher le numero du vendeur
+  const phoneNum = p.phone || 'Non renseigné';
+  document.getElementById('modalSellerPhone').textContent = phoneNum;
+  const callBtn = document.getElementById('modalCallBtn');
+  callBtn.href = `tel:+221${(p.phone || '').replace(/\s/g,'')}`;
+  callBtn.onclick = (e) => {
+    e.stopPropagation();
+    showToast('info', `Appel vers ${p.seller} : ${phoneNum}`);
+  };
+
+  const cond = document.getElementById('modalProductCondition');
+  cond.textContent = p.condition;
+  cond.className = 'detail-condition ' + (p.condition === 'Neuf' ? 'condition-neuf' : p.condition === 'Très bon' ? 'condition-bon' : 'condition-moyen');
+
+  document.getElementById('modalWaveBtn').onclick = () => {
+    const msg = `Achat: ${p.title} - ${formatPrice(p.price)} FCFA sur Suukali`;
+    const waveLink = `https://wave.com/out/send?phone=221${(p.phone||'772573063').replace(/\s/g,'')}&amount=${p.price}&note=${encodeURIComponent(msg)}`;
+    window.open(waveLink, '_blank');
+    showToast('success', `Ouvrez Wave et envoyez ${formatPrice(p.price)} FCFA au ${p.phone || '+221 77 257 30 63'}`);
+  };
+  document.getElementById('modalWhatsappBtn').onclick = () => {
+    const msg = `Bonjour ${p.seller}, je suis intéressé par votre article "${p.title}" à ${formatPrice(p.price)} FCFA sur Suukali.`;
+    window.open(`https://wa.me/221${p.phone?.replace(/\s/g,'')}?text=${encodeURIComponent(msg)}`, '_blank');
+  };
+
+  openModal('productModal');
+}
+
+// ── VENDRE ────────────────────────────────────────────────────────
+function handlePhotos(e) {
+  const files = Array.from(e.target.files).slice(0, 4);
+  photos = [];
+  const preview = document.getElementById('photosPreview');
+  preview.innerHTML = '';
+
+  files.forEach((file, i) => {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      photos[i] = ev.target.result;
+      preview.innerHTML += `
+        <div class="photo-thumb">
+          <img src="${ev.target.result}" alt="Photo ${i+1}">
+          <div class="photo-remove" onclick="removePhoto(${i})">
+            <i class="fas fa-times"></i>
+          </div>
+        </div>`;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function removePhoto(i) {
+  photos.splice(i, 1);
+  document.getElementById('photoInput').value = '';
+  document.getElementById('photosPreview').innerHTML = '';
+}
+
+function handleSell(e) {
+  e.preventDefault();
+
+  const title    = document.getElementById('sellTitle').value.trim();
+  const category = document.getElementById('sellCategory').value;
+  const condition= document.getElementById('sellCondition').value;
+  const price    = parseInt(document.getElementById('sellPrice').value);
+  const desc     = document.getElementById('sellDesc').value.trim();
+  const location = document.getElementById('sellLocation').value;
+  const seller   = document.getElementById('sellName').value.trim();
+  const phone    = document.getElementById('sellPhone').value.trim();
+  const wave     = document.getElementById('waveNumber').value.trim();
+
+  if (!wave) {
+    showToast('error', 'Veuillez entrer votre numéro Wave !');
+    return;
+  }
+
+  const newProduct = {
+    id: 'p' + Date.now(),
+    title, category, condition, price, desc, location, seller, phone,
+    photo: photos[0] || null,
+    emoji: getCatEmoji(category),
+    date: Date.now(),
+    views: 0
+  };
+
+  // Sauvegarder dans Firebase via module
+  if (window._saveToFirebase) {
+    window._saveToFirebase(newProduct).then(ok => {
+      if (ok) showToast('success', `Annonce publiee ! Visible partout !`);
+      else showToast('error', 'Erreur Firebase. Verifier connexion.');
+    });
+  } else {
+    products.unshift(newProduct);
+    showToast('success', `Annonce publiee localement !`);
+    renderProducts(getFilteredSorted());
+  }
+
+  closeModal('sellModal');
+  document.getElementById('sellForm').reset();
+  photos = [];
+  document.getElementById('photosPreview').innerHTML = '';
+
+  renderProducts(getFilteredSorted());
+  showToast('success', `✅ Votre annonce "${title}" est publiée !`);
+  document.getElementById('totalArticles').textContent = products.length;
+  scrollToProducts();
+}
+
+function getCatEmoji(cat) {
+  const map = {
+    vetements:'👕', electronique:'📱', maison:'🏠', chaussures:'👟',
+    sport:'⚽', livres:'📚', bebe:'👶', voiture:'🚗', bijoux:'💎', autre:'📦'
+  };
+  return map[cat] || '📦';
+}
+
+// ── MODALS ────────────────────────────────────────────────────────
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Fermer en cliquant dehors
+document.querySelectorAll('.overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeModal(overlay.id);
+  });
+});
+
+// Fermer avec Echap
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.overlay.active').forEach(o => closeModal(o.id));
+  }
+});
+
+// ── TOAST ─────────────────────────────────────────────────────────
+function showToast(type, message) {
+  const icons = { success: 'fa-check', error: 'fa-exclamation', info: 'fa-info' };
+  const container = document.getElementById('toastContainer');
+
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.innerHTML = `
+    <div class="toast-icon"><i class="fas ${icons[type]}"></i></div>
+    <span>${message}</span>`;
+
+  container.appendChild(toast);
+  setTimeout(() => toast.remove(), 3500);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────
+
+
+// ── CHATBOT FAQ ────────────────────────────────────────────────────
+const FAQ = {
+  "comment vendre un article": "Pour vendre un article :\n1. Clique sur le bouton 'Vendre' en haut\n2. Remplis le formulaire (titre, categorie, prix, etat)\n3. Ajoute des photos\n4. Entre ton numero Wave\n5. Paie les 100 FCFA de publication\n6. Ton annonce est en ligne ! 🎉",
+
+  "comment payer avec wave": "Paiement Wave tres simple :\n1. Ouvre l'app Wave sur ton telephone\n2. Clique 'Envoyer'\n3. Entre le numero du vendeur\n4. Entre le montant\n5. Confirme le paiement\n\nNumero Wave Suukali : +221 77 257 30 63 💚",
+
+  "comment recuperer mon achat": "3 options pour recuperer votre achat :\n\n📍 Remise en main propre (gratuit)\nVous fixez un lieu de rencontre avec le vendeur\n\n🛵 Livraison Jakarta (500-2000 FCFA)\nLe vendeur envoie par moto-taxi\n\n🚌 Transport interurbain\nPour les commandes entre villes",
+
+  "est-ce securise": "Oui, Suukali est securise ! ✅\n\n• Paiement via Wave (application officielle)\n• Numero du vendeur visible avant achat\n• Remise en main propre recommandee\n• Verification de l'article avant paiement\n\nNous recommandons toujours de voir l'article avant de payer !",
+
+  "combien coute la publication": "La publication d'une annonce coute seulement 100 FCFA ! 💰\n\nComment payer :\n1. Remplis ton annonce\n2. Envoie 100 FCFA via Wave au +221 77 257 30 63\n3. Ton annonce est publiee immediatement\n\nC'est le prix d'une publication. La vente elle-meme est gratuite !",
+
+  "contacter le support": "Pour contacter le support Suukali :\n\n📱 WhatsApp : +221 77 257 30 63\n💚 Wave : +221 77 257 30 63\n\nNous repondons en moins de 2 heures pendant les heures ouvrables (8h-20h) 🙏",
+
+  "retour et remboursement": "Politique de retour Suukali :\n\n• Les remboursements sont geres directement entre acheteur et vendeur\n• Nous recommandons de verifier l'article AVANT de payer\n• En cas de litige contactez-nous au +221 77 257 30 63\n• Toujours privilegier la remise en main propre pour eviter les problemes",
+
+  "quelles villes sont disponibles": "Suukali est disponible dans tout le Senegal ! 🇸🇳\n\nPrincipales villes :\n📍 Dakar et banlieue\n📍 Saint-Louis\n📍 Thies\n📍 Touba\n📍 Ziguinchor\n📍 Rufisque\n📍 Et toutes les autres villes !\n\nTu peux vendre et acheter depuis n'importe ou au Senegal.",
+};
+
+function toggleChatbot() {
+  const win = document.getElementById('chatbotWindow');
+  win.classList.toggle('open');
+}
+
+function addBotMsg(text) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg bot';
+  div.innerHTML = text.replace(/\n/g, '<br>');
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addUserMsg(text) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg user';
+  div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function askFaq(btn) {
+  const question = btn.textContent.trim();
+  addUserMsg(question);
+
+  // Trouver la reponse
+  const key = Object.keys(FAQ).find(k =>
+    question.toLowerCase().includes(k) ||
+    k.includes(question.toLowerCase().slice(0, 15))
+  );
+
+  setTimeout(() => {
+    if (key) {
+      addBotMsg(FAQ[key]);
+    } else {
+      addBotMsg("Je n'ai pas compris votre question.\nContactez-nous sur WhatsApp :\n+221 77 257 30 63 💚");
+    }
+  }, 400);
+}
+
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  addUserMsg(text);
+  input.value = '';
+
+  // Chercher dans les FAQ
+  const lower = text.toLowerCase();
+  const key = Object.keys(FAQ).find(k =>
+    lower.includes(k) ||
+    k.split(' ').some(word => word.length > 3 && lower.includes(word))
+  );
+
+  setTimeout(() => {
+    if (key) {
+      addBotMsg(FAQ[key]);
+    } else if (lower.includes('bonjour') || lower.includes('salut') || lower.includes('hello')) {
+      addBotMsg('Bonjour ! 👋 Comment puis-je vous aider ?\nCliquez sur une question ci-dessous ou ecrivez la votre.');
+    } else if (lower.includes('merci')) {
+      addBotMsg('De rien ! 😊 N'hesitez pas si vous avez d'autres questions.\nBonne experience sur Suukali ! 🛍️');
+    } else if (lower.includes('prix') || lower.includes('tarif')) {
+      addBotMsg(FAQ['combien coute la publication']);
+    } else if (lower.includes('wave') || lower.includes('paiement') || lower.includes('payer')) {
+      addBotMsg(FAQ['comment payer avec wave']);
+    } else if (lower.includes('vendre') || lower.includes('publier') || lower.includes('annonce')) {
+      addBotMsg(FAQ['comment vendre un article']);
+    } else if (lower.includes('livraison') || lower.includes('recuperer') || lower.includes('retrait')) {
+      addBotMsg(FAQ['comment recuperer mon achat']);
+    } else {
+      addBotMsg('Je ne suis pas sur de comprendre votre question. 🤔\n\nEssayez de cliquer sur une des questions frequentes ci-dessous, ou contactez-nous directement :\n\n📱 WhatsApp : +221 77 257 30 63');
+    }
+  }, 500);
+}
+
+// ── PANIER MODAL ──────────────────────────────────────────────────
+
+function payerWave() {
+  const total = cart.reduce((sum, p) => sum + p.price, 0);
+  const msg = `Paiement Suukali - Total: ${formatPrice(total)} FCFA`;
+  // Lien Wave deeplink
+  const waveLink = `https://wave.com/out/send?phone=221772573063&amount=${total}&note=${encodeURIComponent(msg)}`;
+  // Essayer d'ouvrir Wave app
+  window.open(waveLink, '_blank');
+  // Afficher instructions
+  showToast('success', `Ouvrez Wave et envoyez ${formatPrice(total)} FCFA au +221 77 257 30 63`);
+}
+
+function renderCart() {
+  const itemsEl = document.getElementById('cartItems');
+  const emptyEl = document.getElementById('cartEmpty');
+  const footerEl = document.getElementById('cartFooter');
+
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '';
+    emptyEl.style.display = 'block';
+    footerEl.style.display = 'none';
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+  footerEl.style.display = 'block';
+
+  let total = 0;
+  itemsEl.innerHTML = cart.map((p, i) => {
+    total += p.price;
+    return `
+    <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--grey-lt);border-radius:12px;margin-bottom:8px">
+      <div style="width:48px;height:48px;border-radius:10px;background:white;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">
+        ${p.emoji || '📦'}
+      </div>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:600;font-size:13px;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.title}</div>
+        <div style="font-size:12px;color:var(--grey)">${p.seller} — ${p.location}</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-family:Syne,sans-serif;font-weight:800;font-size:15px;color:var(--dark)">${formatPrice(p.price)}</div>
+        <div style="font-size:10px;color:var(--grey)">FCFA</div>
+      </div>
+      <button onclick="removeFromCart(${i})" style="width:28px;height:28px;border-radius:8px;background:var(--red);border:none;color:white;cursor:pointer;font-size:11px;flex-shrink:0">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>`;
+  }).join('');
+
+  document.getElementById('cartTotal').textContent = formatPrice(total) + ' FCFA';
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  saveCart();
+  document.getElementById('cartBadge').textContent = cart.length;
+  renderCart();
+  showToast('info', 'Article retiré du panier');
+}
+
+function clearCart() {
+  cart = [];
+  saveCart();
+  document.getElementById('cartBadge').textContent = 0;
+  renderCart();
+  showToast('info', 'Panier vidé');
+}
+
+window.openModal = (id) => { if(id==="cartModal") renderCart(); openModal(id); };
+window.clearCart = clearCart;
+window.payerWave = payerWave;
+window.toggleChatbot = toggleChatbot;
+window.askFaq = askFaq;
+window.sendChat = sendChat;
+window.removeFromCart = removeFromCart;
+window.closeModal = closeModal;
+window.filterByCategory = filterByCategory;
+window.filterProducts = filterProducts;
+window.sortProducts = sortProducts;
+window.filterByCondition = filterByCondition;
+window.scrollToProducts = scrollToProducts;
+window.addToCart = addToCart;
+window.toggleFav = toggleFav;
+window.openProductModal = openProductModal;
+window.handleSell = handleSell;
+window.handlePhotos = handlePhotos;
+window.removePhoto = removePhoto;
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('cartBadge').textContent = cart.length;
+  renderProducts(getFilteredSorted());
+  window._suukaliReady = true;
+  if (window._firebaseProducts && window._firebaseProducts.length > 0) {
+    window._refreshProducts();
+  }
+});
+</script>
+</body>
+</html>
